@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Hook & Caption Generator - Designed by TALHA ANSARI</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .designer-tag {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+    }
+    .designer-name {
+      color: #38bdf8;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .container {
+      width: 100%;
+      max-width: 650px;
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      border: 1px solid #334155;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #475569;
+      background: #0f172a;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    select:focus, input[type="text"]:focus {
+      border-color: #3b82f6;
+    }
+    .btn-generate {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #2563eb, #8b5cf6);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-generate:hover {
+      opacity: 0.95;
+    }
+    .btn-generate:active {
+      transform: scale(0.99);
+    }
+    .result-section {
+      display: none;
+      margin-top: 25px;
+    }
+    .card {
+      background: #0f172a;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #334155;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    .card-header {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-content {
+      font-size: 0.95rem;
+      color: #f1f5f9;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+    .copy-btn {
+      background: #334155;
+      color: #f8fafc;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: #475569;
+    }
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Content Hook AI
+    </div>
+    <div class="designer-tag">Designed by <span class="designer-name">TALHA ANSARI</span></div>
+  </header>
+
+  <div class="container">
+    <div class="form-group">
+      <label for="category"><i class="fa-solid fa-list"></i> Select Content Category</label>
+      <select id="category">
+        <option value="gaming">Gaming & Montages (Free Fire, PUBG, etc.)</option>
+        <option value="drama">Drama & Movie Edits (C-Drama, Anime)</option>
+        <option value="tech">Tech & Tutorials / PC & Mobile Tips</option>
+        <option value="lifestyle">Motivation / Status & Story Shorts</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="topic"><i class="fa-solid fa-pen-nib"></i> Video Topic or Keyword (Optional)</label>
+      <input type="text" id="topic" placeholder="e.g. One Tap Headshot, Best Edit, Fast Speed..." />
+    </div>
+
+    <button class="btn-generate" onclick="generateContent()">
+      <i class="fa-solid fa-bolt"></i> Generate Viral Hooks & Captions
+    </button>
+
+    <div class="result-section" id="resultSection">
+      
+      <div class="card">
+        <div class="card-header">
+          <span><i class="fa-solid fa-fire"></i> First 3-Sec Attention Hook</span>
+          <button class="copy-btn" onclick="copyText('hookText')"><i class="fa-regular fa-copy"></i> Copy</button>
+        </div>
+        <div class="card-content" id="hookText"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span><i class="fa-solid fa-align-left"></i> Video Caption & Call to Action</span>
+          <button class="copy-btn" onclick="copyText('captionText')"><i class="fa-regular fa-copy"></i> Copy</button>
+        </div>
+        <div class="card-content" id="captionText"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span><i class="fa-solid fa-hashtag"></i> High-Reach Hashtags</span>
+          <button class="copy-btn" onclick="copyText('hashtagText')"><i class="fa-regular fa-copy"></i> Copy</button>
+        </div>
+        <div class="card-content" id="hashtagText"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Content Hook AI. Designed by <strong>TALHA ANSARI</strong>. All rights reserved.
+  </footer>
+
+  <script>
+    const database = {
+      gaming: {
+        hooks: [
+          "Stop scrolling! This 1 vs 4 clutch will blow your mind 😱⚡",
+          "Is this the fastest gameplay in 2026? Watch till the end! 🔥",
+          "Nobody expected this secret trick to work... 💥🎮",
+          "Only 1% of players can pull off this movement trick! 🎯"
+        ],
+        captions: [
+          "Rate this montage from 1 to 10 in the comments! 🎯 Drop your UID if you want to play together.",
+          "Tag that one friend who always gets knocked first! 😂 Tag them below!",
+          "Unstoppable gameplay mode activated. Don't forget to like and save for later! 🔥"
+        ],
+        hashtags: "#FreeFire #GamingMontage #Headshot #ViralShorts #TikTokGaming #GamingCommunity #TrendingShorts"
+      },
+      drama: {
+        hooks: [
+          "This scene broke my heart... 💔 Watch till the end!",
+          "The most emotional moment you'll watch today 😭✨",
+          "Wait for the beat drop transformation! 🎧🔥",
+          "This plot twist left everyone silent... 🎬😶"
+        ],
+        captions: [
+          "Which drama scene is your absolute favorite? Let me know in the comments! 👇 ✨",
+          "Save this video for your story status! Drop a heart if you felt this scene ❤️",
+          "Pure emotion in one frame. Share this with someone who loves edits! 🎭"
+        ],
+        hashtags: "#Cdrama #DramaEdits #ShortsEdit #ViralStory #TikTokEdit #StatusVideo #EmotionalEdit"
+      },
+      tech: {
+        hooks: [
+          "Secret phone setting you definitely didn't know about! 📱⚡",
+          "Stop doing this mistake on your mobile right now! ❌📱",
+          "How to make your device 2x faster in 10 seconds! 🚀",
+          "This free website feels illegal to know! 🤫💻"
+        ],
+        captions: [
+          "Try this tip today and tell me if it worked for you! Save this clip so you don't lose it 📌",
+          "Tag a friend who needs this tech hack! Share for more quick tips 🔥",
+          "Quick tech tips made easy! Follow for daily tech hacks and tricks 🚀"
+        ],
+        hashtags: "#TechHacks #MobileTips #AndroidTricks #WebsiteHacks #TechShorts #ViralTech #UsefulTools"
+      },
+      lifestyle: {
+        hooks: [
+          "If you needed a sign today, this is it... ✨",
+          "Read this line again until you understand it 💡",
+          "3 habits that will completely change your life in 30 days 📈",
+          "Don't give up just yet! Listen to this carefully... 🎧"
+        ],
+        captions: [
+          "Double tap if you agree with this! Share this positive message with your best friend ❤️",
+          "Save this post to remind yourself every morning 📌 Stay strong!",
+          "Keep working in silence and let your success make the noise 🔥"
+        ],
+        hashtags: "#Motivation #DailyQuotes #Mindset #ViralQuotes #ShortsMotivation #LifeAdvice #Inspiration"
+      }
+    };
+
+    function generateContent() {
+      const cat = document.getElementById('category').value;
+      const topic = document.getElementById('topic').value.trim();
+      const resultSection = document.getElementById('resultSection');
+
+      const data = database[cat];
+      
+      let randomHook = data.hooks[Math.floor(Math.random() * data.hooks.length)];
+      let randomCaption = data.captions[Math.floor(Math.random() * data.captions.length)];
+      let hashtags = data.hashtags;
+
+      if (topic) {
+        randomCaption = `[Topic: ${topic}]\n` + randomCaption;
+        hashtags = `#${topic.replace(/\s+/g, '')} ` + hashtags;
+      }
+
+      document.getElementById('hookText').innerText = randomHook;
+      document.getElementById('captionText').innerText = randomCaption;
+      document.getElementById('hashtagText').innerText = hashtags;
+
+      resultSection.style.display = 'block';
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard successfully!');
+      });
+    }
+  </script>
+</body>
+</html>
